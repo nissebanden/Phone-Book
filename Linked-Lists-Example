@@ -1,0 +1,67 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        current_node = self.head
+        while current_node.next is not None:
+            current_node = current_node.next
+        current_node.next = new_node
+
+    def print_list(self):
+        current_node = self.head
+        while current_node is not None:
+            print(current_node.data)
+            current_node = current_node.next
+
+
+class film:
+    def __init__(self, title, director):
+        self.title = title
+        self.director = director
+        self.ratings = LinkedList()
+
+    def add_rating(self, rating, num_stars):
+        for _ in range(num_stars):
+            self.ratings.append(rating)
+
+    def get_average_rating(self):
+        current_node = self.ratings.head
+        total = 0
+        count = 0
+        while current_node is not None:
+            total += current_node.data
+            count += 1
+            current_node = current_node.next
+        if count == 0:
+            return 0
+        return total / count
+
+
+film = film("The Great Gatsby", "Baz Luhrmann")
+film.add_rating(1, 39)   
+film.add_rating(2, 52)  
+film.add_rating(3, 45)  
+film.add_rating(4, 78)  
+film.add_rating(5, 108) 
+film.add_rating(6, 160)
+film.add_rating(7, 175) 
+film.add_rating(8, 149) 
+film.add_rating(9, 155) 
+film.add_rating(10, 1)  
+
+print("Title:")
+print(film.title)
+print("Director:")
+print(film.director)
+print("Average rating: ")
+print(film.get_average_rating())
